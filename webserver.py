@@ -1,28 +1,25 @@
-import socket
+#import socket module
 from socket import *
 import sys
 
 serverSocket = socket(AF_INET, SOCK_STREAM)
 
 #Prepare a server socket
-PORT = 12345
-SERVER = socket.gethostbyname(gethostname())
-ADDRESS = (SERVER, PORT)
-print(ADDRESS)
-
-SERVER.bind(ADDRESS)
-
+serverSocket.bind(("localhost", 12345))
+serverSocket.listen(1)
 
 while True:
     #Establish the connection
     print('Ready to serve...')
-    connectionSocket, addr = SERVER.accept()
+    connectionSocket, addr = serverSocket.accept()
     try:
-        message = "Content-Type: text/html\r\n"
+        message = "HelloWorld.html"
         filename = message.split()[1]
         f = open(filename[1:])
-        outputdata = "GET ./Hello World.html"
+        outputdata = f.read()
         #Send one HTTP header line intop socket
+
+        #Send the content of the requested file to the client
         for i in range(0, len(outputdata)):
             connectionSocket.send("\r\n".encode())
         connectionSocket.send("\r\n".encode())
