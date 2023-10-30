@@ -17,8 +17,9 @@ while True:
         filename = message.split()[1]
         f = open(filename[1:])
         outputdata = f.read()
-        #Send one HTTP header line intop socket
-
+        #Send one HTTP header line into socket
+        serverSocket.send("HTTP/1.1 200 OK")
+        serverSocket.send("\r\n")
         #Send the content of the requested file to the client
         for i in range(0, len(outputdata)):
             connectionSocket.send("\r\n".encode())
