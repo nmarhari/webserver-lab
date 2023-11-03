@@ -41,6 +41,7 @@ def connect(connectionSocket, addr):
             connectionSocket.send("<html><head/><body><strong>404 Not Found</strong></body></html>".encode())
             #Close client socket
             connectionSocket.close()
+            break
             
         
 start()
