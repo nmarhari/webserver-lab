@@ -5,18 +5,18 @@ import sys
 serverSocket = socket(AF_INET, SOCK_STREAM)
 
 #Prepare a server socket
-serverSocket.bind(("192.168.1.121", 12345))
-serverSocket.listen(1)
+serverSocket.bind(("192.168.1.121", 12345)) #bind the socket...
+serverSocket.listen(1)  # and have it listen for requests
 
 while True:
     #Establish the connection
     print('Ready to serve...')
-    connectionSocket, addr = serverSocket.accept()
+    connectionSocket, addr = serverSocket.accept() # accept an incoming connection
     try:
-        message = connectionSocket.recv(1024)
+        message = connectionSocket.recv(1024) # receive data from socket
         filename = message.split()[1]
         f = open(filename[1:])
-        outputdata = f.read()
+        outputdata = f.read() # get contents of file to send
         #Send one HTTP header line into socket
         connectionSocket.send("HTTP/1.1 200 OK\r\n\r\n".encode())
         #Send the content of the requested file to the client
