@@ -12,7 +12,9 @@ def send(argv):
     client.connect((sys.argv[1], int(sys.argv[2])))
     msg = ("GET /")
     msg += sys.argv[3]
-    msg += (" HTTP/1.1\r\nHost:192.168.1.121\r\nConnection: close\r\n\r\n")
+    msg += (" HTTP/1.1\r\nHost:")
+    msg += sys.argv[1]
+    msg += ("\r\nConnection: close\r\n\r\n")
     msg = msg.encode()
     client.send(bytes(msg))
     response = client.recv(4096)
